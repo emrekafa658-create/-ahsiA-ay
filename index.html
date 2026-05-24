@@ -1,15 +1,160 @@
-body::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background: rgba(0,0,0,0.5); /* karartma */
-  z-index:0;
-}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Geri Sayım ❤️</title>
 
-.container{
-  position:relative;
-  z-index:1;
-}
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      color:white;
+
+      background: url("bg.jpg") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* karartma efekti (yazılar daha net görünsün diye) */
+    body::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background: rgba(0,0,0,0.55);
+      z-index:0;
+    }
+
+    .container{
+      text-align:center;
+      padding:20px;
+      position:relative;
+      z-index:1;
+    }
+
+    h1{
+      font-size:2.5rem;
+      margin-bottom:40px;
+      color:#ff4d6d;
+    }
+
+    .countdown{
+      display:flex;
+      gap:20px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .box{
+      background: rgba(0,0,0,0.5);
+      padding:25px;
+      border-radius:20px;
+      min-width:120px;
+      backdrop-filter: blur(5px);
+    }
+
+    .number{
+      font-size:3rem;
+      font-weight:bold;
+    }
+
+    .label{
+      margin-top:10px;
+      font-size:1rem;
+      color:#ddd;
+    }
+
+    .heart{
+      margin-top:40px;
+      font-size:1.5rem;
+      color:#ff4d6d;
+      animation:pulse 1.5s infinite;
+    }
+
+    @keyframes pulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.1);}
+      100%{transform:scale(1);}
+    }
+
+    @media (max-width:768px){
+      h1{font-size:1.8rem;}
+      .number{font-size:2.2rem;}
+      .box{min-width:100px;padding:20px;}
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Şahsi Açayıml Kavuşmamıza Kalan Süre ❤️</h1>
+
+    <div class="countdown">
+      <div class="box">
+        <div class="number" id="days">0</div>
+        <div class="label">Gün</div>
+      </div>
+
+      <div class="box">
+        <div class="number" id="hours">0</div>
+        <div class="label">Saat</div>
+      </div>
+
+      <div class="box">
+        <div class="number" id="minutes">0</div>
+        <div class="label">Dakika</div>
+      </div>
+
+      <div class="box">
+        <div class="number" id="seconds">0</div>
+        <div class="label">Saniye</div>
+      </div>
+    </div>
+
+    <div class="heart">❤️ Sayılı Gün İnşallah Çabuk Geçer ❤️</div>
+  </div>
+
+  <script>
+    const targetDate = new Date("2026-05-31T17:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.querySelector(".container").innerHTML =
+          "<h1>❤️ Kavuşma Zamanı ❤️</h1>";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
