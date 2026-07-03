@@ -36,7 +36,7 @@
 
     .container{
       position:relative;
-      z-index:1;
+      z-index:2;
       width:100%;
       max-width:1000px;
       text-align:center;
@@ -84,6 +84,173 @@
       animation:pulse 1.5s infinite;
     }
 
+    /* SOL ÜST İPUCU KUTUSU */
+    .hint-box{
+      position:fixed;
+      top:18px;
+      left:18px;
+      z-index:50;
+      background: rgba(25,25,25,0.55);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:18px;
+      padding:12px 16px;
+      color:#fff;
+      cursor:pointer;
+      backdrop-filter: blur(8px);
+      box-shadow:0 10px 25px rgba(0,0,0,0.28);
+      transition:0.25s ease;
+      user-select:none;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .hint-box:hover{
+      transform:scale(1.04);
+      background: rgba(35,35,35,0.72);
+    }
+
+    .hint-box span:first-child{
+      font-size:1.4rem;
+      animation: bombWiggle 1.2s infinite ease-in-out;
+    }
+
+    .hint-box span:last-child{
+      font-size:0.95rem;
+      color:#ffd6de;
+      font-weight:bold;
+    }
+
+    /* İPUCU MODAL */
+    .hint-modal{
+      position:fixed;
+      inset:0;
+      z-index:200;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,0,0,0.45);
+      padding:20px;
+    }
+
+    .hint-modal.show{
+      display:flex;
+    }
+
+    .hint-card{
+      width:min(92%, 620px);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.15), transparent 35%),
+        linear-gradient(180deg, rgba(64,18,18,0.97), rgba(28,8,8,0.97));
+      border:1px solid rgba(255,140,140,0.25);
+      border-radius:24px;
+      padding:28px 24px;
+      color:#fff4f4;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 25px 60px rgba(0,0,0,0.45);
+      animation:hintIn .35s ease;
+    }
+
+    .hint-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(115deg, transparent 0 47%, rgba(255,255,255,0.06) 48%, transparent 49%),
+        linear-gradient(65deg, transparent 0 42%, rgba(255,180,180,0.05) 43%, transparent 44%);
+      background-size:180px 180px, 220px 220px;
+      opacity:.7;
+      pointer-events:none;
+    }
+
+    .hint-title{
+      position:relative;
+      z-index:2;
+      font-size:1.25rem;
+      color:#ffb6c1;
+      margin-bottom:12px;
+      font-weight:bold;
+    }
+
+    .hint-text{
+      position:relative;
+      z-index:2;
+      font-size:1.12rem;
+      line-height:1.8;
+      color:#fff6f7;
+    }
+
+    .hint-time{
+      position:relative;
+      z-index:2;
+      margin-top:16px;
+      color:#ffb3b3;
+      font-size:0.95rem;
+      letter-spacing:0.4px;
+    }
+
+    /* CAM KIRILMA OVERLAY */
+    .glass-overlay{
+      position:fixed;
+      inset:0;
+      z-index:300;
+      display:none;
+      pointer-events:none;
+      overflow:hidden;
+    }
+
+    .glass-overlay.show{
+      display:block;
+      animation:overlayFade 1.4s ease forwards;
+    }
+
+    .glass-red{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at center, rgba(255,70,70,0.30), rgba(120,0,0,0.08) 48%, transparent 75%);
+      animation:redPulse .45s ease-in-out 3;
+      mix-blend-mode:screen;
+    }
+
+    .glass-cracks{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(62deg, transparent 0 48%, rgba(255,255,255,0.35) 49%, transparent 50%),
+        linear-gradient(122deg, transparent 0 49%, rgba(255,255,255,0.25) 50%, transparent 51%),
+        linear-gradient(25deg, transparent 0 49%, rgba(255,255,255,0.18) 50%, transparent 51%);
+      opacity:0;
+      animation:crackFlash .9s ease forwards;
+    }
+
+    .shard{
+      position:absolute;
+      width:90px;
+      height:90px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.06));
+      border:1px solid rgba(255,255,255,0.15);
+      clip-path: polygon(50% 0%, 100% 38%, 78% 100%, 18% 82%, 0% 28%);
+      opacity:0;
+      box-shadow:0 0 18px rgba(255,255,255,0.12);
+    }
+
+    .glass-overlay.show .shard{
+      animation:shardFly 1s ease-out forwards;
+    }
+
+    .s1{ top:10%; left:18%; animation-delay:.02s; }
+    .s2{ top:18%; right:16%; animation-delay:.08s; }
+    .s3{ top:40%; left:8%; animation-delay:.14s; }
+    .s4{ top:52%; right:12%; animation-delay:.20s; }
+    .s5{ bottom:18%; left:20%; animation-delay:.26s; }
+    .s6{ bottom:10%; right:24%; animation-delay:.32s; }
+    .s7{ top:28%; left:42%; animation-delay:.12s; }
+    .s8{ bottom:24%; right:42%; animation-delay:.22s; }
+
     /* SANDIK ALANI */
     .chest-area{
       margin-top:45px;
@@ -99,7 +266,6 @@
       color:#ffd6de;
     }
 
-    /* KÜÇÜK SANDIK */
     .chest-wrapper{
       position:relative;
       width:170px;
@@ -369,7 +535,7 @@
       display:flex;
     }
 
-    /* PARŞÖMEN KAĞIT */
+    /* PARŞÖMEN */
     .note-card{
       position:relative;
       width:min(95%, 760px);
@@ -505,19 +671,52 @@
       }
     }
 
+    @keyframes bombWiggle{
+      0%,100%{ transform:rotate(0deg) scale(1); }
+      25%{ transform:rotate(-8deg) scale(1.04); }
+      50%{ transform:rotate(6deg) scale(1.08); }
+      75%{ transform:rotate(-4deg) scale(1.03); }
+    }
+
+    @keyframes hintIn{
+      from{ opacity:0; transform:translateY(18px) scale(.96); }
+      to{ opacity:1; transform:translateY(0) scale(1); }
+    }
+
+    @keyframes overlayFade{
+      0%{ opacity:1; }
+      100%{ opacity:0; }
+    }
+
+    @keyframes redPulse{
+      0%,100%{ opacity:.65; }
+      50%{ opacity:1; }
+    }
+
+    @keyframes crackFlash{
+      0%{ opacity:0; transform:scale(1); }
+      30%{ opacity:1; }
+      100%{ opacity:1; transform:scale(1.01); }
+    }
+
+    @keyframes shardFly{
+      0%{
+        opacity:0;
+        transform:translate(0,0) scale(.4) rotate(0deg);
+      }
+      20%{
+        opacity:.95;
+      }
+      100%{
+        opacity:0;
+        transform:translate(var(--tx), var(--ty)) scale(1.15) rotate(var(--rot));
+      }
+    }
+
     @media (max-width:768px){
-      h1{
-        font-size:1.8rem;
-      }
-
-      .number{
-        font-size:2.2rem;
-      }
-
-      .box{
-        min-width:100px;
-        padding:20px;
-      }
+      h1{ font-size:1.8rem; }
+      .number{ font-size:2.2rem; }
+      .box{ min-width:100px; padding:20px; }
 
       .note-card{
         padding:38px 20px 28px;
@@ -535,10 +734,52 @@
       .chest-wrapper{
         transform:scale(0.95);
       }
+
+      .hint-box{
+        top:12px;
+        left:12px;
+        padding:10px 14px;
+      }
+
+      .hint-text{
+        font-size:1rem;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- SOL ÜST İPUCU -->
+  <div class="hint-box" onclick="showHintSequence()">
+    <span>💣</span>
+    <span>İpucu</span>
+  </div>
+
+  <!-- İPUCU NOTU -->
+  <div class="hint-modal" id="hintModal">
+    <div class="hint-card">
+      <div class="hint-title">💣 İpucu</div>
+      <div class="hint-text">
+        Bu siteyi senin için yaptığıma göre <strong>seninle ilgili bir şifre</strong> 😉
+      </div>
+      <div class="hint-time" id="hintTimerText">5 saniye sonra patlayacak...</div>
+    </div>
+  </div>
+
+  <!-- CAM KIRILMA -->
+  <div class="glass-overlay" id="glassOverlay">
+    <div class="glass-red"></div>
+    <div class="glass-cracks"></div>
+
+    <div class="shard s1" style="--tx:-120px; --ty:-80px; --rot:-35deg;"></div>
+    <div class="shard s2" style="--tx:130px; --ty:-90px; --rot:42deg;"></div>
+    <div class="shard s3" style="--tx:-150px; --ty:40px; --rot:-58deg;"></div>
+    <div class="shard s4" style="--tx:140px; --ty:60px; --rot:55deg;"></div>
+    <div class="shard s5" style="--tx:-110px; --ty:95px; --rot:-40deg;"></div>
+    <div class="shard s6" style="--tx:120px; --ty:110px; --rot:48deg;"></div>
+    <div class="shard s7" style="--tx:0px; --ty:-120px; --rot:70deg;"></div>
+    <div class="shard s8" style="--tx:0px; --ty:120px; --rot:-75deg;"></div>
+  </div>
 
   <div class="container">
     <h1>Şahsi Açayımla 🧿 Kavuşmamıza Kalan Süre ❤️</h1>
@@ -568,7 +809,7 @@
     <div class="heart">❤️ Sayılı Gün İnşallah Çabuk Geçer ❤️</div>
 
     <div class="chest-area">
-      <div class="chest-title">Kilitli Sandık</div>
+      <div class="chest-title">Sandık ❤️</div>
 
       <div class="chest-wrapper" id="chest" onclick="openChestAnimation()">
         <div class="floating-hearts hidden" id="floatingHearts">
@@ -594,24 +835,28 @@
     </div>
   </div>
 
+  <!-- ANA NOT -->
   <div class="note-modal" id="noteModal">
     <div class="note-card">
       <button class="close-btn" onclick="closeNote()">✕</button>
-      <h2>Not ❤️</h2>
+      <h2>Sevgilime küçük bir hatırlatma ❤️</h2>
 
-      <p>Sözler</p>
-      <p>Kremşanti sözü</p>
-      <p>6 tane ısırıklar öpücük sözü</p>
-      <p>Bir de Azra hanımın iddası</p>
+      <p><strong>Sözler ✨</strong></p>
+      <p>• Kremşanti sözü 🤍</p>
+      <p>• 6 tane ısırıklı öpücük sözü 💋</p>
+      <p>• Bir de Azra Hanım’ın iddiası 🌸</p>
     </div>
   </div>
 
+  <!-- ŞARKI -->
   <audio id="bgMusic" src="music.mp3" loop></audio>
 
   <script>
     const targetDate = new Date("2026-09-20T14:30:00").getTime();
     const correctPassword = "29112007";
     let chestOpened = false;
+    let hintTimeout = null;
+    let hintInterval = null;
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -662,8 +907,6 @@
       if (!chestOpened) {
         chest.classList.add("open");
         chestOpened = true;
-
-        playMusic();
         triggerHearts();
 
         setTimeout(() => {
@@ -692,6 +935,10 @@
       if (input === correctPassword) {
         errorText.textContent = "";
         document.getElementById("passwordBox").classList.remove("show");
+
+        // ŞARKI ŞİFRE DOĞRU GİRİLİNCE BAŞLASIN
+        playMusic();
+
         showLetterThenNote();
       } else {
         errorText.textContent = "Şifre yanlış";
@@ -700,6 +947,44 @@
 
     function closeNote() {
       document.getElementById("noteModal").classList.remove("show");
+    }
+
+    function showHintSequence() {
+      const hintModal = document.getElementById("hintModal");
+      const timerText = document.getElementById("hintTimerText");
+
+      clearTimeout(hintTimeout);
+      clearInterval(hintInterval);
+
+      hintModal.classList.add("show");
+
+      let seconds = 5;
+      timerText.textContent = seconds + " saniye sonra patlayacak...";
+
+      hintInterval = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+          timerText.textContent = seconds + " saniye sonra patlayacak...";
+        }
+      }, 1000);
+
+      hintTimeout = setTimeout(() => {
+        clearInterval(hintInterval);
+        hintModal.classList.remove("show");
+        explodeHint();
+      }, 5000);
+    }
+
+    function explodeHint() {
+      const overlay = document.getElementById("glassOverlay");
+
+      overlay.classList.remove("show");
+      void overlay.offsetWidth;
+      overlay.classList.add("show");
+
+      setTimeout(() => {
+        overlay.classList.remove("show");
+      }, 1300);
     }
 
     document.getElementById("passwordInput").addEventListener("keydown", function(e) {
