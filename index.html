@@ -1,157 +1,251 @@
-      font-size:5rem;
-      cursor:pointer;
-      transition:transform .25s ease;
-      user-select:none;
-      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.35));
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geri Sayım ❤️</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    .chest:hover{
-      transform:scale(1.08);
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      color: white;
+      background: url("bg.jpg") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      padding: 20px;
     }
 
-    .password-box{
-      display:none;
-      flex-direction:column;
-      gap:12px;
-      align-items:center;
-      background: rgba(0,0,0,0.45);
-      padding:20px;
-      border-radius:18px;
-      backdrop-filter: blur(6px);
-      width:min(90%, 360px);
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1000px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 35px;
+      color: #ff4d6d;
+      text-shadow: 0 0 10px rgba(0,0,0,0.35);
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .box {
+      background: rgba(0, 0, 0, 0.45);
+      padding: 25px;
+      border-radius: 20px;
+      min-width: 120px;
+      backdrop-filter: blur(5px);
       box-shadow: 0 8px 25px rgba(0,0,0,0.25);
     }
 
-    .password-box.show{
-      display:flex;
+    .number {
+      font-size: 3rem;
+      font-weight: bold;
     }
 
-    .password-box input{
-      width:100%;
-      padding:14px 16px;
-      border:none;
-      border-radius:12px;
-      outline:none;
-      font-size:1rem;
-      text-align:center;
-      background: rgba(255,255,255,0.92);
-      color:#111;
+    .label {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #ddd;
     }
 
-    .password-box button{
-      border:none;
-      outline:none;
-      background:#ff4d6d;
-      color:white;
-      padding:12px 24px;
-      border-radius:12px;
-      cursor:pointer;
-      font-size:1rem;
-      font-weight:bold;
-      transition:.25s;
+    .heart {
+      margin-top: 35px;
+      font-size: 1.4rem;
+      color: #ff4d6d;
+      animation: pulse 1.5s infinite;
     }
 
-    .password-box button:hover{
-      background:#ff2f56;
-      transform:translateY(-1px);
+    /* Sandık alanı */
+    .chest-area {
+      margin-top: 45px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
 
-    .error{
-      color:#ffd1d9;
-      font-size:.95rem;
-      min-height:20px;
+    .chest-title {
+      font-size: 1.2rem;
+      color: #ffd6de;
     }
 
-    /* NOT KUTUSU */
-    .note-modal{
-      position:fixed;
-      inset:0;
+    .chest {
+      font-size: 5rem;
+      cursor: pointer;
+      transition: 0.25s;
+      user-select: none;
+    }
+
+    .chest:hover {
+      transform: scale(1.08);
+    }
+
+    .password-box {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      width: min(90%, 360px);
+      background: rgba(0, 0, 0, 0.45);
+      padding: 20px;
+      border-radius: 18px;
+      backdrop-filter: blur(5px);
+    }
+
+    .password-box.show {
+      display: flex;
+    }
+
+    .password-box input {
+      width: 100%;
+      padding: 14px 16px;
+      border: none;
+      outline: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      text-align: center;
+      background: rgba(255,255,255,0.95);
+      color: #111;
+    }
+
+    .password-box button {
+      border: none;
+      background: #ff4d6d;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: 0.25s;
+    }
+
+    .password-box button:hover {
+      background: #ff2f56;
+    }
+
+    .error {
+      min-height: 20px;
+      color: #ffd4dc;
+      font-size: 0.95rem;
+    }
+
+    /* Not ekranı */
+    .note-modal {
+      position: fixed;
+      inset: 0;
       background: rgba(0,0,0,0.65);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:999;
-      padding:20px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 20px;
     }
 
-    .note-modal.show{
-      display:flex;
+    .note-modal.show {
+      display: flex;
     }
 
-    .note-card{
-      width:min(95%, 700px);
-      max-height:85vh;
-      overflow:auto;
-      background: linear-gradient(180deg, rgba(255,244,247,0.98), rgba(255,233,239,0.98));
-      color:#222;
-      border-radius:24px;
-      padding:28px 24px;
-      text-align:left;
+    .note-card {
+      position: relative;
+      width: min(95%, 700px);
+      max-height: 85vh;
+      overflow-y: auto;
+      background: #fff4f7;
+      color: #222;
+      border-radius: 24px;
+      padding: 30px 24px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      position:relative;
-      border:2px solid rgba(255,77,109,0.25);
+      text-align: left;
     }
 
-    .close-btn{
-      position:absolute;
-      right:14px;
-      top:12px;
-      border:none;
-      background:#ff4d6d;
-      color:#fff;
-      width:38px;
-      height:38px;
-      border-radius:50%;
-      font-size:1.1rem;
-      cursor:pointer;
-      font-weight:bold;
+    .note-card h2 {
+      text-align: center;
+      color: #ff4d6d;
+      margin-bottom: 20px;
+      font-size: 2rem;
     }
 
-    .note-card h2{
-      color:#ff4d6d;
-      text-align:center;
-      margin-bottom:20px;
-      font-size:2rem;
+    .note-card p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 10px;
     }
 
-    .note-card h3{
-      color:#d6336c;
-      margin-top:18px;
-      margin-bottom:10px;
-      font-size:1.2rem;
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: #ff4d6d;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    .note-card ul{
-      padding-left:22px;
-      line-height:1.9;
-      margin-bottom:10px;
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
     }
 
-    .note-card li{
-      margin-bottom:4px;
-    }
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
 
-    .note-card p{
-      line-height:1.8;
-      margin-bottom:10px;
-    }
+      .number {
+        font-size: 2.2rem;
+      }
 
-    @keyframes pulse{
-      0%{transform:scale(1);}
-      50%{transform:scale(1.1);}
-      100%{transform:scale(1);}
-    }
+      .box {
+        min-width: 100px;
+        padding: 20px;
+      }
 
-    @media (max-width:768px){
-      h1{font-size:1.8rem;}
-      .number{font-size:2.2rem;}
-      .box{min-width:100px;padding:20px;}
-      .chest{font-size:4.2rem;}
-      .note-card h2{font-size:1.6rem;}
+      .chest {
+        font-size: 4.2rem;
+      }
+
+      .note-card h2 {
+        font-size: 1.6rem;
+      }
     }
   </style>
 </head>
-
 <body>
 
   <div class="container">
@@ -181,35 +275,27 @@
 
     <div class="heart">❤️ Sayılı Gün İnşallah Çabuk Geçer ❤️</div>
 
-    <!-- SANDIK ALANI -->
-    <div class="chest-section">
-      <div class="chest-title">Gizli Kutu 🔐</div>
+    <div class="chest-area">
+      <div class="chest-title">Sandık ❤️</div>
       <div class="chest" onclick="togglePasswordBox()">📦</div>
 
       <div class="password-box" id="passwordBox">
         <input type="password" id="passwordInput" placeholder="Şifreyi gir..." />
-        <button onclick="openChest()">Sandığı Aç</button>
+        <button onclick="openChest()">Aç</button>
         <div class="error" id="errorText"></div>
       </div>
     </div>
   </div>
 
-  <!-- NOT EKRANI -->
   <div class="note-modal" id="noteModal">
     <div class="note-card">
       <button class="close-btn" onclick="closeNote()">✕</button>
-      <h2>❤️ Gizli Not ❤️</h2>
+      <h2>Not ❤️</h2>
 
-      <h3>Sözler</h3>
-      <ul>
-        <li>Kremşanti sözü</li>
-        <li>6 tane ısırıklar öpücük sözü</li>
-        <li>Azra hanımın iddası</li>
-      </ul>
-
-      <p>
-      
-      </p>
+      <p>Sözler</p>
+      <p>Kremşanti sözü</p>
+      <p>6 tane ısırıklar öpücük sözü</p>
+      <p>Bir de Azra hanımın iddası</p>
     </div>
   </div>
 
@@ -222,8 +308,7 @@
       const distance = targetDate - now;
 
       if (distance <= 0) {
-        document.querySelector(".container").innerHTML =
-          "<h1>❤️ Kavuşma Zamanı ❤️</h1>";
+        document.querySelector(".container").innerHTML = "<h1>❤️ Kavuşma Zamanı ❤️</h1>";
         return;
       }
 
@@ -232,15 +317,15 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById("days").innerText = days;
-      document.getElementById("hours").innerText = hours;
-      document.getElementById("minutes").innerText = minutes;
-      document.getElementById("seconds").innerText = seconds;
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
     }
 
     function togglePasswordBox() {
       document.getElementById("passwordBox").classList.toggle("show");
-      document.getElementById("errorText").innerText = "";
+      document.getElementById("errorText").textContent = "";
     }
 
     function openChest() {
@@ -248,10 +333,10 @@
       const errorText = document.getElementById("errorText");
 
       if (input === correctPassword) {
-        errorText.innerText = "";
+        errorText.textContent = "";
         document.getElementById("noteModal").classList.add("show");
       } else {
-        errorText.innerText = "Şifre yanlış 😢";
+        errorText.textContent = "Şifre yanlış";
       }
     }
 
@@ -259,8 +344,8 @@
       document.getElementById("noteModal").classList.remove("show");
     }
 
-    document.getElementById("passwordInput").addEventListener("keydown", function(e){
-      if(e.key === "Enter"){
+    document.getElementById("passwordInput").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
         openChest();
       }
     });
