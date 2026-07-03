@@ -2,246 +2,343 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Geri Sayım ❤️</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
-      color: white;
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow-x:hidden;
+      color:white;
       background: url("bg.jpg") no-repeat center center fixed;
       background-size: cover;
       position: relative;
-      padding: 20px;
+      padding:20px;
     }
 
-    body::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.55);
-      z-index: 0;
+    body::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,0.55);
+      z-index:0;
     }
 
-    .container {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 1000px;
-      text-align: center;
-      padding: 20px;
+    .container{
+      position:relative;
+      z-index:1;
+      width:100%;
+      max-width:1000px;
+      text-align:center;
+      padding:20px;
     }
 
-    h1 {
-      font-size: 2.4rem;
-      margin-bottom: 35px;
-      color: #ff4d6d;
-      text-shadow: 0 0 10px rgba(0,0,0,0.35);
+    h1{
+      font-size:2.4rem;
+      margin-bottom:35px;
+      color:#ff4d6d;
+      text-shadow:0 0 10px rgba(0,0,0,0.35);
     }
 
-    .countdown {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
+    .countdown{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:20px;
     }
 
-    .box {
-      background: rgba(0, 0, 0, 0.45);
-      padding: 25px;
-      border-radius: 20px;
-      min-width: 120px;
+    .box{
+      background: rgba(0,0,0,0.45);
+      padding:25px;
+      border-radius:20px;
+      min-width:120px;
       backdrop-filter: blur(5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      box-shadow:0 8px 25px rgba(0,0,0,0.25);
     }
 
-    .number {
-      font-size: 3rem;
-      font-weight: bold;
+    .number{
+      font-size:3rem;
+      font-weight:bold;
     }
 
-    .label {
-      margin-top: 10px;
-      font-size: 1rem;
-      color: #ddd;
+    .label{
+      margin-top:10px;
+      font-size:1rem;
+      color:#ddd;
     }
 
-    .heart {
-      margin-top: 35px;
-      font-size: 1.4rem;
-      color: #ff4d6d;
-      animation: pulse 1.5s infinite;
+    .heart{
+      margin-top:35px;
+      font-size:1.4rem;
+      color:#ff4d6d;
+      animation:pulse 1.5s infinite;
     }
 
-    /* Sandık alanı */
-    .chest-area {
-      margin-top: 45px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
+    /* SANDIK ALANI */
+    .chest-area{
+      margin-top:45px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
     }
 
-    .chest-title {
-      font-size: 1.2rem;
-      color: #ffd6de;
+    .chest-title{
+      font-size:1.2rem;
+      color:#ffd6de;
     }
 
-    .chest {
-      font-size: 5rem;
-      cursor: pointer;
-      transition: 0.25s;
-      user-select: none;
+    .chest-wrapper{
+      position:relative;
+      width:220px;
+      height:170px;
+      cursor:pointer;
+      transition:transform .25s ease;
     }
 
-    .chest:hover {
-      transform: scale(1.08);
+    .chest-wrapper:hover{
+      transform:scale(1.03);
     }
 
-    .password-box {
-      display: none;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-      width: min(90%, 360px);
-      background: rgba(0, 0, 0, 0.45);
-      padding: 20px;
-      border-radius: 18px;
+    .chest-lid{
+      position:absolute;
+      top:0;
+      left:10px;
+      width:200px;
+      height:75px;
+      background: linear-gradient(to bottom, #8b5a2b, #6f431f);
+      border:4px solid #4b2e16;
+      border-bottom:none;
+      border-radius:120px 120px 20px 20px;
+      z-index:2;
+      box-shadow: inset 0 8px 0 rgba(255,255,255,0.08);
+    }
+
+    .chest-lid::before,
+    .chest-lid::after{
+      content:"";
+      position:absolute;
+      top:0;
+      width:18px;
+      height:100%;
+      background:#d4a437;
+      border-left:2px solid #9b6d12;
+      border-right:2px solid #9b6d12;
+    }
+
+    .chest-lid::before{ left:28px; }
+    .chest-lid::after{ right:28px; }
+
+    .chest-base{
+      position:absolute;
+      bottom:0;
+      left:0;
+      width:220px;
+      height:105px;
+      background: linear-gradient(to bottom, #7b4a22, #5b3418);
+      border:4px solid #4b2e16;
+      border-radius:18px;
+      z-index:1;
+      box-shadow: inset 0 10px 0 rgba(255,255,255,0.05);
+    }
+
+    .chest-base::before,
+    .chest-base::after{
+      content:"";
+      position:absolute;
+      top:0;
+      width:20px;
+      height:100%;
+      background:#d4a437;
+      border-left:2px solid #9b6d12;
+      border-right:2px solid #9b6d12;
+    }
+
+    .chest-base::before{ left:34px; }
+    .chest-base::after{ right:34px; }
+
+    .lock{
+      position:absolute;
+      left:50%;
+      top:72px;
+      transform:translateX(-50%);
+      width:42px;
+      height:50px;
+      background:#f0c14b;
+      border:3px solid #9b6d12;
+      border-radius:8px;
+      z-index:3;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .lock::before{
+      content:"";
+      position:absolute;
+      top:-22px;
+      left:50%;
+      transform:translateX(-50%);
+      width:26px;
+      height:24px;
+      border:4px solid #9b6d12;
+      border-bottom:none;
+      border-radius:20px 20px 0 0;
+    }
+
+    .lock::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:20px;
+      transform:translateX(-50%);
+      width:8px;
+      height:14px;
+      background:#7a5200;
+      border-radius:10px;
+    }
+
+    .password-box{
+      display:none;
+      flex-direction:column;
+      gap:12px;
+      align-items:center;
+      width:min(90%, 360px);
+      background: rgba(0,0,0,0.45);
+      padding:20px;
+      border-radius:18px;
       backdrop-filter: blur(5px);
     }
 
-    .password-box.show {
-      display: flex;
+    .password-box.show{
+      display:flex;
     }
 
-    .password-box input {
-      width: 100%;
-      padding: 14px 16px;
-      border: none;
-      outline: none;
-      border-radius: 12px;
-      font-size: 1rem;
-      text-align: center;
+    .password-box input{
+      width:100%;
+      padding:14px 16px;
+      border:none;
+      outline:none;
+      border-radius:12px;
+      font-size:1rem;
+      text-align:center;
       background: rgba(255,255,255,0.95);
-      color: #111;
+      color:#111;
     }
 
-    .password-box button {
-      border: none;
-      background: #ff4d6d;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      transition: 0.25s;
+    .password-box button{
+      border:none;
+      background:#ff4d6d;
+      color:white;
+      padding:12px 24px;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:1rem;
+      font-weight:bold;
+      transition:0.25s;
     }
 
-    .password-box button:hover {
-      background: #ff2f56;
+    .password-box button:hover{
+      background:#ff2f56;
     }
 
-    .error {
-      min-height: 20px;
-      color: #ffd4dc;
-      font-size: 0.95rem;
+    .error{
+      min-height:20px;
+      color:#ffd4dc;
+      font-size:0.95rem;
     }
 
-    /* Not ekranı */
-    .note-modal {
-      position: fixed;
-      inset: 0;
+    /* NOT EKRANI */
+    .note-modal{
+      position:fixed;
+      inset:0;
       background: rgba(0,0,0,0.65);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      padding: 20px;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+      padding:20px;
     }
 
-    .note-modal.show {
-      display: flex;
+    .note-modal.show{
+      display:flex;
     }
 
-    .note-card {
-      position: relative;
-      width: min(95%, 700px);
-      max-height: 85vh;
-      overflow-y: auto;
-      background: #fff4f7;
-      color: #222;
-      border-radius: 24px;
-      padding: 30px 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-      text-align: left;
+    .note-card{
+      position:relative;
+      width:min(95%, 700px);
+      max-height:85vh;
+      overflow-y:auto;
+      background:#fff4f7;
+      color:#222;
+      border-radius:24px;
+      padding:30px 24px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.35);
+      text-align:left;
     }
 
-    .note-card h2 {
-      text-align: center;
-      color: #ff4d6d;
-      margin-bottom: 20px;
-      font-size: 2rem;
+    .note-card h2{
+      text-align:center;
+      color:#ff4d6d;
+      margin-bottom:20px;
+      font-size:2rem;
     }
 
-    .note-card p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 10px;
+    .note-card p{
+      font-size:1.1rem;
+      line-height:1.8;
+      margin-bottom:10px;
     }
 
-    .close-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 38px;
-      height: 38px;
-      border: none;
-      border-radius: 50%;
-      background: #ff4d6d;
-      color: white;
-      font-size: 1.1rem;
-      cursor: pointer;
-      font-weight: bold;
+    .close-btn{
+      position:absolute;
+      top:12px;
+      right:12px;
+      width:38px;
+      height:38px;
+      border:none;
+      border-radius:50%;
+      background:#ff4d6d;
+      color:white;
+      font-size:1.1rem;
+      cursor:pointer;
+      font-weight:bold;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-      100% { transform: scale(1); }
+    @keyframes pulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.08);}
+      100%{transform:scale(1);}
     }
 
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
+    @media (max-width:768px){
+      h1{
+        font-size:1.8rem;
       }
 
-      .number {
-        font-size: 2.2rem;
+      .number{
+        font-size:2.2rem;
       }
 
-      .box {
-        min-width: 100px;
-        padding: 20px;
+      .box{
+        min-width:100px;
+        padding:20px;
       }
 
-      .chest {
-        font-size: 4.2rem;
+      .chest-wrapper{
+        transform:scale(0.9);
       }
 
-      .note-card h2 {
-        font-size: 1.6rem;
+      .note-card h2{
+        font-size:1.6rem;
       }
     }
   </style>
@@ -276,8 +373,13 @@
     <div class="heart">❤️ Sayılı Gün İnşallah Çabuk Geçer ❤️</div>
 
     <div class="chest-area">
-      <div class="chest-title">Kilitli Sandık </div>
-      <div class="chest" onclick="togglePasswordBox()">📦</div>
+      <div class="chest-title">Sandık ❤️</div>
+
+      <div class="chest-wrapper" onclick="togglePasswordBox()">
+        <div class="chest-lid"></div>
+        <div class="chest-base"></div>
+        <div class="lock"></div>
+      </div>
 
       <div class="password-box" id="passwordBox">
         <input type="password" id="passwordInput" placeholder="Şifreyi gir..." />
