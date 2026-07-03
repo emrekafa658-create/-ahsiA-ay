@@ -84,7 +84,7 @@
       animation:pulse 1.5s infinite;
     }
 
-    /* SANDIK */
+    /* SANDIK ALANI */
     .chest-area{
       margin-top:45px;
       display:flex;
@@ -95,14 +95,15 @@
     }
 
     .chest-title{
-      font-size:1.2rem;
+      font-size:1.15rem;
       color:#ffd6de;
     }
 
+    /* KÜÇÜK SANDIK */
     .chest-wrapper{
       position:relative;
-      width:220px;
-      height:170px;
+      width:170px;
+      height:130px;
       cursor:pointer;
       transition:transform .25s ease;
       perspective:1000px;
@@ -115,13 +116,13 @@
     .chest-lid{
       position:absolute;
       top:0;
-      left:10px;
-      width:200px;
-      height:75px;
+      left:8px;
+      width:154px;
+      height:58px;
       background: linear-gradient(to bottom, #8b5a2b, #6f431f);
       border:4px solid #4b2e16;
       border-bottom:none;
-      border-radius:120px 120px 20px 20px;
+      border-radius:90px 90px 16px 16px;
       z-index:3;
       transform-origin: bottom center;
       transition: transform 0.8s ease;
@@ -137,25 +138,25 @@
       content:"";
       position:absolute;
       top:0;
-      width:18px;
+      width:14px;
       height:100%;
       background:#d4a437;
       border-left:2px solid #9b6d12;
       border-right:2px solid #9b6d12;
     }
 
-    .chest-lid::before{ left:28px; }
-    .chest-lid::after{ right:28px; }
+    .chest-lid::before{ left:22px; }
+    .chest-lid::after{ right:22px; }
 
     .chest-base{
       position:absolute;
       bottom:0;
       left:0;
-      width:220px;
-      height:105px;
+      width:170px;
+      height:78px;
       background: linear-gradient(to bottom, #7b4a22, #5b3418);
       border:4px solid #4b2e16;
-      border-radius:18px;
+      border-radius:16px;
       z-index:1;
       box-shadow: inset 0 10px 0 rgba(255,255,255,0.05);
       overflow:visible;
@@ -166,23 +167,23 @@
       content:"";
       position:absolute;
       top:0;
-      width:20px;
+      width:16px;
       height:100%;
       background:#d4a437;
       border-left:2px solid #9b6d12;
       border-right:2px solid #9b6d12;
     }
 
-    .chest-base::before{ left:34px; }
-    .chest-base::after{ right:34px; }
+    .chest-base::before{ left:26px; }
+    .chest-base::after{ right:26px; }
 
     .lock{
       position:absolute;
       left:50%;
-      top:72px;
+      top:56px;
       transform:translateX(-50%);
-      width:42px;
-      height:50px;
+      width:34px;
+      height:40px;
       background:#f0c14b;
       border:3px solid #9b6d12;
       border-radius:8px;
@@ -198,24 +199,24 @@
     .lock::before{
       content:"";
       position:absolute;
-      top:-22px;
+      top:-18px;
       left:50%;
       transform:translateX(-50%);
-      width:26px;
-      height:24px;
+      width:20px;
+      height:20px;
       border:4px solid #9b6d12;
       border-bottom:none;
-      border-radius:20px 20px 0 0;
+      border-radius:18px 18px 0 0;
     }
 
     .lock::after{
       content:"";
       position:absolute;
       left:50%;
-      top:20px;
+      top:15px;
       transform:translateX(-50%);
-      width:8px;
-      height:14px;
+      width:7px;
+      height:12px;
       background:#7a5200;
       border-radius:10px;
     }
@@ -224,10 +225,10 @@
     .floating-hearts{
       position:absolute;
       left:50%;
-      bottom:80px;
+      bottom:60px;
       transform:translateX(-50%);
-      width:220px;
-      height:180px;
+      width:170px;
+      height:150px;
       pointer-events:none;
       z-index:10;
       overflow:visible;
@@ -236,16 +237,16 @@
     .floating-heart{
       position:absolute;
       bottom:0;
-      font-size:24px;
+      font-size:22px;
       opacity:0;
       animation: floatHeart 2.4s ease-out forwards;
     }
 
-    .floating-heart:nth-child(1){ left:20px; animation-delay:0s; }
-    .floating-heart:nth-child(2){ left:55px; animation-delay:0.15s; }
-    .floating-heart:nth-child(3){ left:95px; animation-delay:0.3s; }
-    .floating-heart:nth-child(4){ left:135px; animation-delay:0.45s; }
-    .floating-heart:nth-child(5){ left:175px; animation-delay:0.6s; }
+    .floating-heart:nth-child(1){ left:10px; animation-delay:0s; }
+    .floating-heart:nth-child(2){ left:40px; animation-delay:0.15s; }
+    .floating-heart:nth-child(3){ left:70px; animation-delay:0.3s; }
+    .floating-heart:nth-child(4){ left:100px; animation-delay:0.45s; }
+    .floating-heart:nth-child(5){ left:130px; animation-delay:0.6s; }
 
     .floating-hearts.hidden{
       display:none;
@@ -255,10 +256,10 @@
     .letter-pop{
       position:absolute;
       left:50%;
-      bottom:55px;
+      bottom:42px;
       transform:translateX(-50%);
-      width:120px;
-      height:85px;
+      width:95px;
+      height:68px;
       background:#fff6f8;
       border:3px solid #e7a5b5;
       border-radius:10px;
@@ -291,7 +292,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:30px;
+      font-size:26px;
       z-index:2;
     }
 
@@ -300,6 +301,7 @@
       animation: letterRise 1.4s ease forwards;
     }
 
+    /* ŞİFRE KUTUSU */
     .password-box{
       display:none;
       flex-direction:column;
@@ -351,7 +353,7 @@
       font-size:0.95rem;
     }
 
-    /* NOT */
+    /* NOT MODAL */
     .note-modal{
       position:fixed;
       inset:0;
@@ -367,31 +369,74 @@
       display:flex;
     }
 
+    /* PARŞÖMEN KAĞIT */
     .note-card{
       position:relative;
-      width:min(95%, 700px);
+      width:min(95%, 760px);
       max-height:85vh;
       overflow-y:auto;
-      background:#fff4f7;
-      color:#222;
-      border-radius:24px;
-      padding:30px 24px;
-      box-shadow:0 20px 50px rgba(0,0,0,0.35);
+      color:#4e3422;
+      border-radius:18px;
+      padding:42px 30px 34px;
       text-align:left;
       animation:fadeIn .35s ease;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(120,72,24,0.12), transparent 30%),
+        linear-gradient(180deg, #f7e7bd 0%, #efd8a2 45%, #e6c98c 100%);
+      border:2px solid #b3874c;
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.35),
+        inset 0 0 40px rgba(120,72,24,0.12),
+        inset 0 0 0 2px rgba(255,248,220,0.25);
+    }
+
+    .note-card::before{
+      content:"";
+      position:absolute;
+      inset:12px;
+      border:1px solid rgba(120,72,24,0.25);
+      border-radius:12px;
+      pointer-events:none;
+    }
+
+    .note-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:18px;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(110,70,30,0.035) 0px,
+          rgba(110,70,30,0.035) 2px,
+          transparent 2px,
+          transparent 8px
+        );
+      mix-blend-mode:multiply;
+      pointer-events:none;
+      opacity:0.55;
     }
 
     .note-card h2{
       text-align:center;
-      color:#ff4d6d;
-      margin-bottom:20px;
+      color:#7a3e12;
+      margin-bottom:24px;
       font-size:2rem;
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing:0.5px;
+      text-shadow:0 1px 0 rgba(255,255,255,0.3);
+      position:relative;
+      z-index:1;
     }
 
     .note-card p{
-      font-size:1.1rem;
-      line-height:1.8;
+      font-size:1.15rem;
+      line-height:2;
       margin-bottom:10px;
+      font-family: Georgia, "Times New Roman", serif;
+      position:relative;
+      z-index:1;
     }
 
     .close-btn{
@@ -402,11 +447,17 @@
       height:38px;
       border:none;
       border-radius:50%;
-      background:#ff4d6d;
-      color:white;
+      background:#8b5a2b;
+      color:#fff7e6;
       font-size:1.1rem;
       cursor:pointer;
       font-weight:bold;
+      z-index:3;
+      box-shadow:0 4px 10px rgba(0,0,0,0.18);
+    }
+
+    .close-btn:hover{
+      background:#6f431f;
     }
 
     @keyframes pulse{
@@ -435,7 +486,7 @@
         opacity:1;
       }
       100%{
-        transform:translateY(-150px) scale(1.25) rotate(12deg);
+        transform:translateY(-130px) scale(1.2) rotate(12deg);
         opacity:0;
       }
     }
@@ -450,7 +501,7 @@
       }
       100%{
         opacity:1;
-        transform:translateX(-50%) translateY(-140px) scale(1.05);
+        transform:translateX(-50%) translateY(-120px) scale(1.05);
       }
     }
 
@@ -468,12 +519,21 @@
         padding:20px;
       }
 
-      .chest-wrapper{
-        transform:scale(0.9);
+      .note-card{
+        padding:38px 20px 28px;
       }
 
       .note-card h2{
         font-size:1.6rem;
+      }
+
+      .note-card p{
+        font-size:1.05rem;
+        line-height:1.85;
+      }
+
+      .chest-wrapper{
+        transform:scale(0.95);
       }
     }
   </style>
@@ -546,7 +606,6 @@
     </div>
   </div>
 
-  <!-- MÜZİK -->
   <audio id="bgMusic" src="music.mp3" loop></audio>
 
   <script>
@@ -618,7 +677,6 @@
     function showLetterThenNote() {
       const letter = document.getElementById("letterPop");
       letter.classList.remove("show");
-
       void letter.offsetWidth;
       letter.classList.add("show");
 
