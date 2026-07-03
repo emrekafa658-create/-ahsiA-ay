@@ -546,6 +546,9 @@
     </div>
   </div>
 
+  <!-- MÜZİK -->
+  <audio id="bgMusic" src="music.mp3" loop></audio>
+
   <script>
     const targetDate = new Date("2026-09-20T14:30:00").getTime();
     const correctPassword = "29112007";
@@ -569,6 +572,11 @@
       document.getElementById("hours").textContent = hours;
       document.getElementById("minutes").textContent = minutes;
       document.getElementById("seconds").textContent = seconds;
+    }
+
+    function playMusic() {
+      const music = document.getElementById("bgMusic");
+      music.play().catch(() => {});
     }
 
     function triggerHearts() {
@@ -595,6 +603,8 @@
       if (!chestOpened) {
         chest.classList.add("open");
         chestOpened = true;
+
+        playMusic();
         triggerHearts();
 
         setTimeout(() => {
@@ -609,7 +619,7 @@
       const letter = document.getElementById("letterPop");
       letter.classList.remove("show");
 
-      void letter.offsetWidth; // animasyonu resetler
+      void letter.offsetWidth;
       letter.classList.add("show");
 
       setTimeout(() => {
