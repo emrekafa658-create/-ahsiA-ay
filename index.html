@@ -84,13 +84,14 @@
       animation:pulse 1.5s infinite;
     }
 
-    /* SANDIK ALANI */
+    /* SANDIK */
     .chest-area{
       margin-top:45px;
       display:flex;
       flex-direction:column;
       align-items:center;
       gap:16px;
+      position:relative;
     }
 
     .chest-title{
@@ -104,6 +105,7 @@
       height:170px;
       cursor:pointer;
       transition:transform .25s ease;
+      perspective:1000px;
     }
 
     .chest-wrapper:hover{
@@ -120,8 +122,14 @@
       border:4px solid #4b2e16;
       border-bottom:none;
       border-radius:120px 120px 20px 20px;
-      z-index:2;
+      z-index:3;
+      transform-origin: bottom center;
+      transition: transform 0.8s ease;
       box-shadow: inset 0 8px 0 rgba(255,255,255,0.08);
+    }
+
+    .chest-wrapper.open .chest-lid{
+      transform: rotateX(-120deg);
     }
 
     .chest-lid::before,
@@ -150,6 +158,7 @@
       border-radius:18px;
       z-index:1;
       box-shadow: inset 0 10px 0 rgba(255,255,255,0.05);
+      overflow:visible;
     }
 
     .chest-base::before,
@@ -177,8 +186,13 @@
       background:#f0c14b;
       border:3px solid #9b6d12;
       border-radius:8px;
-      z-index:3;
+      z-index:4;
       box-shadow:0 4px 10px rgba(0,0,0,0.2);
+      transition:opacity .3s ease;
+    }
+
+    .chest-wrapper.open .lock{
+      opacity:0;
     }
 
     .lock::before{
@@ -206,6 +220,86 @@
       border-radius:10px;
     }
 
+    /* KALPLER */
+    .floating-hearts{
+      position:absolute;
+      left:50%;
+      bottom:80px;
+      transform:translateX(-50%);
+      width:220px;
+      height:180px;
+      pointer-events:none;
+      z-index:10;
+      overflow:visible;
+    }
+
+    .floating-heart{
+      position:absolute;
+      bottom:0;
+      font-size:24px;
+      opacity:0;
+      animation: floatHeart 2.4s ease-out forwards;
+    }
+
+    .floating-heart:nth-child(1){ left:20px; animation-delay:0s; }
+    .floating-heart:nth-child(2){ left:55px; animation-delay:0.15s; }
+    .floating-heart:nth-child(3){ left:95px; animation-delay:0.3s; }
+    .floating-heart:nth-child(4){ left:135px; animation-delay:0.45s; }
+    .floating-heart:nth-child(5){ left:175px; animation-delay:0.6s; }
+
+    .floating-hearts.hidden{
+      display:none;
+    }
+
+    /* MEKTUP */
+    .letter-pop{
+      position:absolute;
+      left:50%;
+      bottom:55px;
+      transform:translateX(-50%);
+      width:120px;
+      height:85px;
+      background:#fff6f8;
+      border:3px solid #e7a5b5;
+      border-radius:10px;
+      z-index:9;
+      display:none;
+      box-shadow:0 10px 20px rgba(0,0,0,0.25);
+    }
+
+    .letter-pop::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:
+        linear-gradient(135deg, transparent 49%, #f3cad4 50%, transparent 51%),
+        linear-gradient(225deg, transparent 49%, #f3cad4 50%, transparent 51%);
+      background-size:50% 100%;
+      background-repeat:no-repeat;
+      background-position:left top, right top;
+      border-radius:8px;
+      opacity:0.9;
+    }
+
+    .letter-pop::after{
+      content:"💌";
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:30px;
+      z-index:2;
+    }
+
+    .letter-pop.show{
+      display:block;
+      animation: letterRise 1.4s ease forwards;
+    }
+
     .password-box{
       display:none;
       flex-direction:column;
@@ -216,6 +310,7 @@
       padding:20px;
       border-radius:18px;
       backdrop-filter: blur(5px);
+      animation:fadeIn .4s ease;
     }
 
     .password-box.show{
@@ -256,7 +351,7 @@
       font-size:0.95rem;
     }
 
-    /* NOT EKRANI */
+    /* NOT */
     .note-modal{
       position:fixed;
       inset:0;
@@ -283,6 +378,7 @@
       padding:30px 24px;
       box-shadow:0 20px 50px rgba(0,0,0,0.35);
       text-align:left;
+      animation:fadeIn .35s ease;
     }
 
     .note-card h2{
@@ -317,6 +413,45 @@
       0%{transform:scale(1);}
       50%{transform:scale(1.08);}
       100%{transform:scale(1);}
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(10px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @keyframes floatHeart{
+      0%{
+        transform:translateY(0) scale(0.7);
+        opacity:0;
+      }
+      15%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(-150px) scale(1.25) rotate(12deg);
+        opacity:0;
+      }
+    }
+
+    @keyframes letterRise{
+      0%{
+        opacity:0;
+        transform:translateX(-50%) translateY(20px) scale(0.7);
+      }
+      20%{
+        opacity:1;
+      }
+      100%{
+        opacity:1;
+        transform:translateX(-50%) translateY(-140px) scale(1.05);
+      }
     }
 
     @media (max-width:768px){
@@ -373,9 +508,19 @@
     <div class="heart">❤️ Sayılı Gün İnşallah Çabuk Geçer ❤️</div>
 
     <div class="chest-area">
-      <div class="chest-title">Sandeeeeeeeeeeeeeık ❤️</div>
+      <div class="chest-title">Sandık ❤️</div>
 
-      <div class="chest-wrapper" onclick="togglePasswordBox()">
+      <div class="chest-wrapper" id="chest" onclick="openChestAnimation()">
+        <div class="floating-hearts hidden" id="floatingHearts">
+          <div class="floating-heart">❤️</div>
+          <div class="floating-heart">💖</div>
+          <div class="floating-heart">💕</div>
+          <div class="floating-heart">💗</div>
+          <div class="floating-heart">💘</div>
+        </div>
+
+        <div class="letter-pop" id="letterPop"></div>
+
         <div class="chest-lid"></div>
         <div class="chest-base"></div>
         <div class="lock"></div>
@@ -383,7 +528,7 @@
 
       <div class="password-box" id="passwordBox">
         <input type="password" id="passwordInput" placeholder="Şifreyi gir..." />
-        <button onclick="openChest()">Aç</button>
+        <button onclick="checkPassword()">Aç</button>
         <div class="error" id="errorText"></div>
       </div>
     </div>
@@ -404,6 +549,7 @@
   <script>
     const targetDate = new Date("2026-09-20T14:30:00").getTime();
     const correctPassword = "29112007";
+    let chestOpened = false;
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -425,18 +571,60 @@
       document.getElementById("seconds").textContent = seconds;
     }
 
-    function togglePasswordBox() {
-      document.getElementById("passwordBox").classList.toggle("show");
-      document.getElementById("errorText").textContent = "";
+    function triggerHearts() {
+      const hearts = document.getElementById("floatingHearts");
+
+      hearts.classList.remove("hidden");
+      hearts.innerHTML = `
+        <div class="floating-heart">❤️</div>
+        <div class="floating-heart">💖</div>
+        <div class="floating-heart">💕</div>
+        <div class="floating-heart">💗</div>
+        <div class="floating-heart">💘</div>
+      `;
+
+      setTimeout(() => {
+        hearts.classList.add("hidden");
+      }, 2600);
     }
 
-    function openChest() {
+    function openChestAnimation() {
+      const chest = document.getElementById("chest");
+      const passwordBox = document.getElementById("passwordBox");
+
+      if (!chestOpened) {
+        chest.classList.add("open");
+        chestOpened = true;
+        triggerHearts();
+
+        setTimeout(() => {
+          passwordBox.classList.add("show");
+        }, 900);
+      } else {
+        passwordBox.classList.toggle("show");
+      }
+    }
+
+    function showLetterThenNote() {
+      const letter = document.getElementById("letterPop");
+      letter.classList.remove("show");
+
+      void letter.offsetWidth; // animasyonu resetler
+      letter.classList.add("show");
+
+      setTimeout(() => {
+        document.getElementById("noteModal").classList.add("show");
+      }, 1400);
+    }
+
+    function checkPassword() {
       const input = document.getElementById("passwordInput").value.trim();
       const errorText = document.getElementById("errorText");
 
       if (input === correctPassword) {
         errorText.textContent = "";
-        document.getElementById("noteModal").classList.add("show");
+        document.getElementById("passwordBox").classList.remove("show");
+        showLetterThenNote();
       } else {
         errorText.textContent = "Şifre yanlış";
       }
@@ -448,7 +636,7 @@
 
     document.getElementById("passwordInput").addEventListener("keydown", function(e) {
       if (e.key === "Enter") {
-        openChest();
+        checkPassword();
       }
     });
 
